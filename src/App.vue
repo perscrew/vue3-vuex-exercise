@@ -15,22 +15,6 @@ export default {
   components: {
     TheNavigation,
   },
-  data() {
-    return {
-      todos: [
-        { id: "t1", name: "Todo 1" },
-        { id: "t2", name: "Todo 2" },
-        { id: "t3", name: "Todo 3" },
-      ],
-      auth: { isUserLogged: false}
-    };
-  },
-  provide() {
-    return {
-      todos: this.todos,
-      auth: this.auth,
-    };
-  },
 };
 </script>
 

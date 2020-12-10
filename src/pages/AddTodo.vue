@@ -7,26 +7,29 @@
 
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-  inject: ["todos", "auth"],
   data() {
     return {
       todo: "",
     };
   },
+  computed: {
+    ...mapGetters(["isUserLogged"]),
+  },
   methods: {
     submitForm() {
       if (this.todo?.trim()) {
-        // TODO call add todo action
-        this.todos.push({ id: new Date().toString(), name: this.todo });
+        this.$store.dispatch("addTodo", {
+          id: new Date().toString(),
+          name: this.todo,
+        });
         this.$router.push({ name: "todos" });
       }
     },
   },
   beforeRouteEnter(to, from, next) {
-    next(
-      (vm) => !vm.auth.isUserLogged && vm.$router.replace({ name: "login" })
-    );
+    next((vm) => !vm.isUserLogged && vm.$router.replace({ name: "login" }));
   },
 };
 </script>

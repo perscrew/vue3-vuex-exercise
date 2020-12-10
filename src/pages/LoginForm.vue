@@ -10,11 +10,9 @@
 
 <script>
 export default {
-  inject: ["auth"],
   methods: {
     login() {
-      // TODO call login action.
-      this.auth.isUserLogged = true;
+      this.$store.dispatch('login');
       this.$router.replace({ name: "todos" });
     },
   },

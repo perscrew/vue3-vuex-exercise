@@ -17,9 +17,13 @@
 
 <script>
 import TodoItem from "../components/UI/TodoItem.vue";
+import { mapGetters } from "vuex";
+mapGetters
 export default {
   components: { TodoItem },
-  inject: ["todos", "auth"],
+  computed: {
+      ...mapGetters(['isUserLogged', 'todos'])
+  },
   methods: {
     removeTodo(id) {
       // TODO call remove todo action
@@ -29,7 +33,7 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     next(
-      (vm) => !vm.auth.isUserLogged && vm.$router.replace({ name: "login" })
+      (vm) => !vm.isUserLogged && vm.$router.replace({ name: "login" })
     );
   },
 };
